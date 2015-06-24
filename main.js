@@ -18,6 +18,7 @@ http.createServer(responseHandler).listen(8888);
 
 var fbRef = new Firebase("https://samer-node-testing.firebaseio.com/");
 var fbEntriesRef = fbRef.child("entries");
+var totalsRef = fbRef.child("totals");
 
 function responseHandler(req, res) {
   if (req.url.match("fav")) {
@@ -33,6 +34,7 @@ function responseHandler(req, res) {
   } else {
     var apiEndpoint = req.url.match(/\/(\w+)\/?(.+)?/i)[1];
     var apiValue = req.url.match(/\/(\w+)\/?(.+)?/i)[2];
+    console.log(apiEndpoint, apiValue);
     var apiResult;
     res.writeHead(200, {"Content-Type": "text/plain"});
     switch(apiEndpoint) {
@@ -52,6 +54,10 @@ function responseHandler(req, res) {
       timestamp: Firebase.ServerValue.TIMESTAMP,
       ipAddress: req.connection.remoteAddress,
       userAgent: req.headers['user-agent']
+    });
+    var useCounter = totalsRef.child(apiEndpoint);
+    useCounter.transaction(function (current_value) {
+      return (current_value || 0) + 1;
     });
   }
 }
