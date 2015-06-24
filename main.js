@@ -16,7 +16,7 @@ var fs = require("fs"),
 
 http.createServer(responseHandler).listen(8888);
 
-var fbRef = new Firebase("https://samer-node-testing.firebaseio.com/");
+var fbRef = new Firebase("https://ch-node-test.firebaseio.com/");
 var fbEntriesRef = fbRef.child("entries");
 var totalsRef = fbRef.child("totals");
 
