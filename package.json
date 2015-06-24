@@ -5,6 +5,7 @@
   "main": "main.js",
   "dependencies": {
     "MD5": "^1.2.2",
+    "firebase": "^2.2.7",
     "request": "^2.58.0"
   },
   "devDependencies": {},

@@ -14,9 +14,10 @@ var fs = require("fs"),
   Firebase = require('firebase'),
   md5 = require('MD5');
 
-http.createServer(responseHandler).listen(8888);
+http.createServer(responseHandler).listen(process.env.PORT);
 
-var fbRef = new Firebase("https://ch-node-test.firebaseio.com/");
+var fbRef = new Firebase(process.env.FB_URL);
+//var fbRef = new Firebase("https://ch-node-test.firebaseio.com/");
 var fbEntriesRef = fbRef.child("entries");
 var totalsRef = fbRef.child("totals");
 
