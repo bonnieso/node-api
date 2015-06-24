@@ -17,6 +17,7 @@ var fs = require("fs"),
 http.createServer(responseHandler).listen(8888);
 
 var fbRef = new Firebase("https://samer-node-testing.firebaseio.com/");
+var fbEntriesRef = fbRef.child("entries");
 
 function responseHandler(req, res) {
   if (req.url.match("fav")) {
@@ -44,7 +45,7 @@ function responseHandler(req, res) {
         res.end(apiResult+"\n");
         break;
     }
-    fbRef.push({
+    fbEntriesRef.push({
       apiEndPoint: apiEndpoint,
       apiValue: apiValue,
       apiResult: apiResult,
